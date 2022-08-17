@@ -8,7 +8,7 @@ import (
 )
 
 //Initialized Vector or Alphabets
-var alphabets = []byte("a b c d e f g h i j k l m n o p q r s t u v w x y z")
+var alphabets = []byte{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 
 // Please keep this key secret
 var secretKey string = "£ * % & > < ! ) \" ( @ a b c d e f g h i j k l m n o"
@@ -54,5 +54,40 @@ func Decryption(text, secretKey string) (string, error) {
 }
 
 func main() {
-	fmt.Println("Hello")
+	fmt.Println("Welcome to the encryption and Decryption Arena")
+
+	var choice int
+	fmt.Println("Press the number of your choice, \n" +
+		"1. Encrypt a text \n" +
+		"2. Decrypt your text")
+	fmt.Scanln(&choice)
+
+	switch choice {
+	case 1:
+		//Encrypting texts
+		var phrase string
+		fmt.Println("What do you want to encrypt?: ")
+		fmt.Scanln(&phrase)
+
+		encText, err := Encryption(phrase, secretKey)
+		if err != nil {
+			errMessage := "error in encoding your text: "
+			fmt.Print(errMessage, err)
+			
+		}
+		fmt.Println("Your encrypted message key is: ", encText)
+	case 2:
+		var decryptionKey string
+		fmt.Println("What do you want to encrypt?: ")
+		fmt.Scanln(&decryptionKey)
+
+		decText, err := Decryption(decryptionKey, secretKey)
+		if err != nil {
+			errMessage := "error in decoding your text: "
+			fmt.Print(errMessage, err)
+		}
+		fmt.Println("Your encrypted message key is: ", decText)
+	default:
+		fmt.Println("Wrong choice!!!")
+	}
 }
