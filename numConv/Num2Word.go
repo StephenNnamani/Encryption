@@ -63,7 +63,7 @@ func convertNum2Words(num int) string {
 	return s
 }
 
-func main() string {
+func main() {
 	fmt.Println("================================================")
 	fmt.Println("WELCOME TO THE BANK OF STEPHEN :)")
 	fmt.Println("================================================")
@@ -79,7 +79,7 @@ func main() string {
 		var typeOfAmount int
 		fmt.Println("Choose the mode you want to fill (press 1 or 2) \n" +
 			"1. I am typing the amount in numbers \n" +
-			"2. I am typing the amount in words \n")
+			"2. I am typing the amount in words")
 		fmt.Scan(&typeOfAmount)
 
 		switch typeOfAmount {
