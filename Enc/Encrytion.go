@@ -8,7 +8,7 @@ import (
 )
 
 //Initialized Vector or Alphabets
-var alphabets = []byte("abcdefghijklmnopqrstuvwxyz1234567")
+var IV = []byte{00, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
 
 // Please keep this key secret
 var secretKey string = "£*%&><!)\"(@abcdefghijklmnopqrst"
@@ -34,7 +34,7 @@ func Encryption(text, secretKey string) (string, error) {
 		return "", err
 	}
 	plainText := []byte(text)
-	cfb := cipher.NewCFBEncrypter(block, alphabets)
+	cfb := cipher.NewCFBEncrypter(block, IV)
 	cipherText := make([]byte, len(plainText))
 	cfb.XORKeyStream(cipherText, plainText)
 	return encodeBase64(cipherText), nil
@@ -47,20 +47,23 @@ func Decryption(text, secretKey string) (string, error) {
 		return "", err
 	}
 	cipherText := decodeBase64(text)
-	cfb := cipher.NewCFBDecrypter(block, alphabets)
+	cfb := cipher.NewCFBDecrypter(block, IV)
 	plainText := make([]byte, len(cipherText))
 	cfb.XORKeyStream(plainText, cipherText)
 	return string(plainText), nil
 }
 
 func main() {
+	fmt.Println("==========================================================")
 	fmt.Println("Welcome to the encryption and Decryption Arena")
+	fmt.Println("==========================================================")
 
 	var choice int
 	fmt.Println("Press the number of your choice, \n" +
 		"1. Encrypt a text \n" +
 		"2. Decrypt your text")
 	fmt.Scanln(&choice)
+	fmt.Println("==========================================================")
 
 	switch choice {
 	case 1:
@@ -75,10 +78,13 @@ func main() {
 			fmt.Print(errMessage, err)
 
 		}
+		fmt.Println("==========================================================")
 		fmt.Println("Your encrypted message key is: ", encText)
+		fmt.Println("==========================================================")
+
 	case 2:
 		var decryptionKey string
-		fmt.Println("What do you want to encrypt?: ")
+		fmt.Println("What do you want to decrypt?: ")
 		fmt.Scanln(&decryptionKey)
 
 		decText, err := Decryption(decryptionKey, secretKey)
@@ -86,7 +92,10 @@ func main() {
 			errMessage := "error in decoding your text: "
 			fmt.Print(errMessage, err)
 		}
+		fmt.Println("==========================================================")
 		fmt.Println("Your encrypted message key is: ", decText)
+		fmt.Println("==========================================================")
+
 	default:
 		fmt.Println("Wrong choice!!!")
 	}
