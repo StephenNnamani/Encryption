@@ -8,10 +8,10 @@ import (
 )
 
 //Initialized Vector or Alphabets
-var alphabets = []byte{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
+var alphabets = []byte("abcdefghijklmnopqrstuvwxyz1234567")
 
 // Please keep this key secret
-var secretKey string = "£ * % & > < ! ) \" ( @ a b c d e f g h i j k l m n o"
+var secretKey string = "£*%&><!)\"(@abcdefghijklmnopqrst"
 
 // Encoding here
 func encodeBase64(b []byte) string {
@@ -73,7 +73,7 @@ func main() {
 		if err != nil {
 			errMessage := "error in encoding your text: "
 			fmt.Print(errMessage, err)
-			
+
 		}
 		fmt.Println("Your encrypted message key is: ", encText)
 	case 2:
