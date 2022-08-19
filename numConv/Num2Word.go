@@ -10,6 +10,44 @@ var tensNames = []string{"twenty", "thirty", "forty", "fifty", "sixty", "seventy
 
 var bigNames = []string{"thousand", "million", "billion"}
 
+var NumWords = map[string]map[int]string{
+	"lowNumbers": {
+		0: "zero", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight",
+		9: "nine", 10: "ten", 11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen", 15: "fifteen", 16: "sixteen",
+		17: "seventeen", 18: "eighteen", 19: "nineteen",
+	},
+
+	"tens": {20: "twenty", 30: "thirty", 40: "forty", 50: "fifty", 60: "sixty", 70: "seventy", 80: "eighty", 90: "ninety"},
+
+	"hundred": {100: "hundred"},
+
+	"thousand": {1000: "thousand"},
+
+	"Million": {1000000: "million"},
+
+	"billion": {1000000000: "billion"},
+}
+
+func convertWords(words string) int {
+	for k, _ := range NumWords {
+		if k != words {
+			for k, v := range NumWords["tens"] {
+				if v == words {
+					fmt.Println("The Amount in figure is: ", k)
+				}
+				return k
+			}
+		} else if k != words {
+			for k, v := range NumWords["thousand"] {
+				if v == words {
+					fmt.Println("The Amount in figure is: ", k)
+				}
+			}
+		}
+	}
+	return convertWords(words)
+}
+
 func convert999(num int) string {
 	s1 := lowNames[num/100] + " hundred"
 	s2 := convert99(num % 100)
@@ -69,7 +107,7 @@ func main() {
 	fmt.Println("================================================")
 
 	var decision string
-	fmt.Println("Do you want to run a transfer?")
+	fmt.Println("Do you want to run a transfer? (y/n)")
 	fmt.Scan(&decision)
 
 	switch decision {
@@ -90,8 +128,16 @@ func main() {
 
 			fmt.Println("================================================")
 			fmt.Println("The Amount in figure: \n", amount)
-			fmt.Println("Amount in Words: \n", convertNum2Words(amount))
+			fmt.Println("Amount in Words: \n", convertNum2Words(amount), "NGN")
 			fmt.Println("================================================")
+
+		case 2:
+			var words string
+			fmt.Print("Kindly type the amount you wish to transfer: ")
+			fmt.Scan(&words)
+
+			fmt.Println(convertWords(words))
+
 		default:
 			fmt.Print("Nice")
 		}

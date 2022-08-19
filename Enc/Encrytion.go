@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-//Initialized Vector or Alphabets
+//Initialized Vector or Alphabets ==== "Your combination of keys returns error because they don't the same byte encoding with the alphabets"
 var IV = []byte{00, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
 
 // Please keep this key secret
